@@ -26,8 +26,24 @@ namespace cv12
 
         public Image updateField(int cell, int value)
         {
+            //
+            field[cell] += value;
+            if (field[cell] == 4)
+                field[cell] = 0;
+            if (field[cell] == -1)
+                field[cell] = 3;
+            if (value == 1)
+            {
+               this.imgarray[cell].RotateFlip(RotateFlipType.Rotate90FlipNone);
+            }
+            if (value == -1)
+            {
+                this.imgarray[cell].RotateFlip(RotateFlipType.Rotate270FlipNone);
+            }
+            Console.WriteLine("Updated cell " + cell + ". New value: " + field[cell]);
             return this.imgarray[cell];
         }
+
 
         public Image getImage(int i)
         {
@@ -39,6 +55,7 @@ namespace cv12
             this.moveCount = 0;
             this.timeSpent = 0;
         }
+
 
         public bool isGameOver()
         {

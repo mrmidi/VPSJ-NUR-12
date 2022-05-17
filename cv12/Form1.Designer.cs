@@ -76,6 +76,8 @@ namespace cv12
             this.p2.Size = new System.Drawing.Size(150, 150);
             this.p2.TabIndex = 1;
             this.p2.TabStop = false;
+            this.p2.Click += new System.EventHandler(this.p2_Click);
+            this.p2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.p2_MouseDown);
             // 
             // p3
             // 
@@ -84,6 +86,8 @@ namespace cv12
             this.p3.Size = new System.Drawing.Size(150, 150);
             this.p3.TabIndex = 2;
             this.p3.TabStop = false;
+            this.p3.Click += new System.EventHandler(this.p3_Click);
+            this.p3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.p3_MouseDown);
             // 
             // p6
             // 
@@ -108,6 +112,7 @@ namespace cv12
             this.p4.Size = new System.Drawing.Size(150, 150);
             this.p4.TabIndex = 3;
             this.p4.TabStop = false;
+            this.p4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.p4_MouseDown);
             // 
             // p9
             // 
