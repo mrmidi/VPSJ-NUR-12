@@ -14,7 +14,7 @@ namespace cv12
 {
     public partial class Form1 : Form
     {
-        public Bitmap pzl;
+        private static Game game = new Game();
         public Form1()
         {
             InitializeComponent();
@@ -22,61 +22,66 @@ namespace cv12
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Assembly myAssembly = Assembly.GetExecutingAssembly();
-            //Stream myStream = myAssembly.GetManifestResourceStream()
-            //Stream myStream = myAssembly.GetManifestResourceStream("cv12.Images.pzl.jpg");
-            //Bitmap pzl = new Bitmap(myStream);
-            string[] names = myAssembly.GetManifestResourceNames();
-            foreach (string name in names)
+            drawField();
+        }
+
+        public void drawField() //iterate pictureboxes, load images
+        {
+            int count = 1;
+            game.generateField();
+            var imgarray = game.getImages();
+            foreach (Control p in this.Controls) 
             {
-                Console.WriteLine(name);
-            }
-            Bitmap pzl = new Bitmap(Properties.Resources.tripadvisortimessquare_taggeryanceyiv_5912__1_, new Size(450, 450));
-
-            var imgarray = new Image[9];
-            var img = pzl;
-
-            for (int i = 0; i < 3; i++)
-            { 
-
-                
-                
+                if (p is PictureBox)
                 {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        var index = i * 3 + j;
-                        imgarray[index] = new Bitmap(150, 150);
-                        var graphics = Graphics.FromImage(imgarray[index]);
-                        graphics.DrawImage(img, new Rectangle(0, 0, 150, 150), new Rectangle(i * 150, j * 150, 150, 150), GraphicsUnit.Pixel);
-                        graphics.Dispose();
-                    }
+                    int n = Int32.Parse(p.Name.Substring(1));
+                    ((PictureBox)p).Image = imgarray[n-1];
                 }
             }
-
-            p1.Image = imgarray[0];
-            p2.Image = imgarray[3];
-            p3.Image = imgarray[6];
-            p4.Image = imgarray[1];
-            p5.Image = imgarray[4];
-            p6.Image = imgarray[7];
-            p7.Image = imgarray[2];
-            p8.Image = imgarray[5];
-            p9.Image = imgarray[8];
-
-            //pzl = (Bitmap)Image.FromFile(@"../../ Images/pzl.jpg");
         }
-        private Image crop(Bitmap src, int x, int y)
-        {
-            Rectangle cropRect = new Rectangle();
-            Bitmap target = new Bitmap(cropRect.Width, cropRect.Height);
 
-            using (Graphics g = Graphics.FromImage(target))
+
+
+        public void rotate()
+        {
+            var rand = new Random();
+            for (int i = 0; i < 9; i++)
             {
-                g.DrawImage(src, new Rectangle(0, 0, target.Width, target.Height),
-                                 cropRect,
-                                 GraphicsUnit.Pixel);
+                int r = rand.Next(3);
             }
-            return target;
+        }
+
+        private void openCustomPictureToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog f = new OpenFileDialog();
+            f.Filter = "Obrazky (*.jpg;*.png) |*.jpg;*.png";
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                Image img = Image.FromFile(f.FileName);
+                imageCropForm icf = new imageCropForm(img, game, this);
+                icf.Show();
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            drawField();
+        }
+
+        private void p1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void p1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                p1.Image = 
+                //drawField();
+                //game.
+            }
         }
     }
     
