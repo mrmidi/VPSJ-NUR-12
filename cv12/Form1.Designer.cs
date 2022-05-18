@@ -36,10 +36,11 @@ namespace cv12
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCustomPictureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.highScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.p9 = new System.Windows.Forms.PictureBox();
             this.p8 = new System.Windows.Forms.PictureBox();
             this.p7 = new System.Windows.Forms.PictureBox();
@@ -49,10 +50,9 @@ namespace cv12
             this.p3 = new System.Windows.Forms.PictureBox();
             this.p2 = new System.Windows.Forms.PictureBox();
             this.p1 = new System.Windows.Forms.PictureBox();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.scoreStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sbMoves = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sbTimer = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.p9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p8)).BeginInit();
@@ -65,6 +65,11 @@ namespace cv12
             ((System.ComponentModel.ISupportInitialize)(this.p1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // ofd
             // 
@@ -106,21 +111,17 @@ namespace cv12
             this.highScoresToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.highScoresToolStripMenuItem.Text = "&High Scores";
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(185, 6);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(187, 500);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 27);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "&New Game";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -133,9 +134,19 @@ namespace cv12
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(187, 500);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(103, 27);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "&New Game";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // p9
             // 
@@ -221,33 +232,28 @@ namespace cv12
             this.p1.Click += new System.EventHandler(this.p1_Click);
             this.p1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.p1_MouseDown);
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(185, 6);
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.scoreStatus,
-            this.toolStripStatusLabel1});
+            this.sbMoves,
+            this.sbTimer});
             this.statusStrip1.Location = new System.Drawing.Point(0, 543);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(472, 22);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // scoreStatus
+            // sbMoves
             // 
-            this.scoreStatus.Name = "scoreStatus";
-            this.scoreStatus.Size = new System.Drawing.Size(48, 17);
-            this.scoreStatus.Text = "Score: 0";
+            this.sbMoves.Name = "sbMoves";
+            this.sbMoves.Size = new System.Drawing.Size(54, 17);
+            this.sbMoves.Text = "Moves: 0";
             // 
-            // toolStripStatusLabel1
+            // sbTimer
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(50, 17);
-            this.toolStripStatusLabel1.Text = "Time: 0s";
+            this.sbTimer.Name = "sbTimer";
+            this.sbTimer.Size = new System.Drawing.Size(50, 17);
+            this.sbTimer.Text = "Time: 0s";
             // 
             // Form1
             // 
@@ -299,7 +305,6 @@ namespace cv12
         private System.Windows.Forms.PictureBox p9;
         private System.Windows.Forms.PictureBox p8;
         private System.Windows.Forms.PictureBox p7;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -311,8 +316,9 @@ namespace cv12
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel scoreStatus;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel sbMoves;
+        private System.Windows.Forms.ToolStripStatusLabel sbTimer;
+        public System.Windows.Forms.Timer timer1;
     }
 }
 

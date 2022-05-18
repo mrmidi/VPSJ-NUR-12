@@ -24,7 +24,7 @@ namespace cv12
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://youtu.be/dQw4w9WgXcQ");
+            System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=QDia3e12czc");
         }
     }
 }

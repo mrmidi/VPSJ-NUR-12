@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace cv12
 {
@@ -25,9 +26,32 @@ namespace cv12
             initField();
         }
 
-        public void updateTimeSpient()
+        public void updateTimeSpent()
         {
             this.timeSpent++;
+        }
+
+        public String getTimeSpent()
+        {
+            return this.timeSpent.ToString();
+        }
+
+        public void debugField()
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                Console.WriteLine(field[i]);
+            }
+        }
+
+        public String getMoves()
+        {
+            return moveCount.ToString();
+        }
+
+        public void addMove()
+        {
+            this.moveCount++;
         }
 
         public Image updateField(int cell, int value)
@@ -61,10 +85,6 @@ namespace cv12
 
         public void resetGame()
         {
-            for (int i = 0; i < 9; i++)
-            {
-                field[i] = 0;
-            }
             this.moveCount = 0;
             this.timeSpent = 0;
         }
@@ -92,6 +112,8 @@ namespace cv12
                     
             }
             Console.WriteLine("game over");
+            String greatingstext = "Congratulations! You've solved the puzzle in " + getMoves() + " moves and in " + getTimeSpent() + " seconds!";
+            MessageBox.Show(greatingstext, "You win", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return true;
         }
 

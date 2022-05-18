@@ -67,19 +67,28 @@ namespace cv12
         {
             if (game.isGameOver() == false)
             {
+                game.addMove();
+                sbMoves.Text = "Moves: " + game.getMoves();
                 int n = int.Parse(pb.Name.Substring(1));
                 pb.Image = game.updateField(n - 1, val);
+                if (game.isGameOver() == true)
+                {
+                    timer1.Enabled = false;
+                }
             }
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             if (game.enabled == true)
             {
                 game.generateField();
                 game.resetGame();
                 drawField();
+                game.debugField();
+                timer1.Enabled = true;
             }
             else if (game.enabled == false)
             {
@@ -87,7 +96,10 @@ namespace cv12
                 game.generateField();
                 game.resetGame();
                 drawField();
+                game.debugField();
+                timer1.Enabled = true;
             }
+            sbMoves.Text = "Moves: " + game.getMoves();
         }
 
         private void p1_Click(object sender, EventArgs e)
@@ -200,6 +212,17 @@ namespace cv12
         {
             AboutForm aboutForm = new AboutForm();
             aboutForm.ShowDialog();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            game.updateTimeSpent();
+            sbTimer.Text = ("Time: " + game.getTimeSpent() + "s");
         }
     }
     
