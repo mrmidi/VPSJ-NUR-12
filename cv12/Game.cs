@@ -14,6 +14,7 @@ namespace cv12
         private int timeSpent; 
         private Image[] imgarray = new Image[9];
         private Dictionary<int, int> field = new Dictionary<int, int>();
+        public bool enabled = false;
 
         public Game() //empty constructor
         {
@@ -24,23 +25,31 @@ namespace cv12
             initField();
         }
 
+        public void updateTimeSpient()
+        {
+            this.timeSpent++;
+        }
+
         public Image updateField(int cell, int value)
         {
             //
-            field[cell] += value;
-            if (field[cell] == 4)
-                field[cell] = 0;
-            if (field[cell] == -1)
-                field[cell] = 3;
-            if (value == 1)
-            {
-               this.imgarray[cell].RotateFlip(RotateFlipType.Rotate90FlipNone);
+            if (this.enabled == true) 
+            { 
+                field[cell] += value;
+                if (field[cell] == 4)
+                    field[cell] = 0;
+                if (field[cell] == -1)
+                    field[cell] = 3;
+                if (value == 1)
+                {
+                   this.imgarray[cell].RotateFlip(RotateFlipType.Rotate90FlipNone);
+                }
+                if (value == -1)
+                {
+                    this.imgarray[cell].RotateFlip(RotateFlipType.Rotate270FlipNone);
+                }
+                Console.WriteLine("Updated cell " + cell + ". New value: " + field[cell]);
             }
-            if (value == -1)
-            {
-                this.imgarray[cell].RotateFlip(RotateFlipType.Rotate270FlipNone);
-            }
-            Console.WriteLine("Updated cell " + cell + ". New value: " + field[cell]);
             return this.imgarray[cell];
         }
 
@@ -54,6 +63,16 @@ namespace cv12
         {
             this.moveCount = 0;
             this.timeSpent = 0;
+        }
+
+        public String getScore()
+        {
+            return "";
+        }
+
+        public String getTime()
+        {
+            return this.timeSpent.ToString();
         }
 
 

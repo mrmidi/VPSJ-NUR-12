@@ -53,7 +53,7 @@ namespace cv12
         private void openCustomPictureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog f = new OpenFileDialog();
-            f.Filter = "Obrazky (*.jpg;*.png) |*.jpg;*.png";
+            f.Filter = "Pictures (*.jpg;*.png) |*.jpg;*.png";
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Image img = Image.FromFile(f.FileName);
@@ -63,9 +63,29 @@ namespace cv12
 
         }
 
+        private void move(PictureBox pb, int val)
+        {
+            if (game.isGameOver() == false)
+            {
+                int n = int.Parse(pb.Name.Substring(1));
+                pb.Image = game.updateField(n - 1, val);
+            }
+        }
+
+
         private void button1_Click(object sender, EventArgs e)
         {
-            drawField();
+            if (game.enabled == true)
+            {
+                game.resetGame();
+                drawField();
+            }
+            else
+            {
+                game.enabled = true;
+                game.resetGame();
+                drawField();
+            }
         }
 
         private void p1_Click(object sender, EventArgs e)
@@ -83,11 +103,6 @@ namespace cv12
                 move((sender as PictureBox), 1);
         }
 
-        private void move(PictureBox pb, int val)
-        {
-            int n = int.Parse(pb.Name.Substring(1));
-            pb.Image = game.updateField(n-1, val);
-        }
 
         private void p2_Click(object sender, EventArgs e)
         {
@@ -127,6 +142,62 @@ namespace cv12
 
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
                 move((sender as PictureBox), 1);
+        }
+
+        private void p5_MouseDown(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine((sender as PictureBox).Name);
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                move((sender as PictureBox), -1);
+
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                move((sender as PictureBox), 1);
+        }
+
+        private void p6_MouseDown(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine((sender as PictureBox).Name);
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                move((sender as PictureBox), -1);
+
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                move((sender as PictureBox), 1);
+        }
+
+        private void p7_MouseDown(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine((sender as PictureBox).Name);
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                move((sender as PictureBox), -1);
+
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                move((sender as PictureBox), 1);
+        }
+
+        private void p8_MouseDown(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine((sender as PictureBox).Name);
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                move((sender as PictureBox), -1);
+
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                move((sender as PictureBox), 1);
+        }
+
+        private void p9_MouseDown(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine((sender as PictureBox).Name);
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+                move((sender as PictureBox), -1);
+
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                move((sender as PictureBox), 1);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm aboutForm = new AboutForm();
+            aboutForm.ShowDialog();
         }
     }
     
