@@ -33,7 +33,7 @@ namespace cv12
         public Image updateField(int cell, int value)
         {
             //
-            if (this.enabled == true) 
+            if (this.enabled == true && isGameOver() == false) 
             { 
                 field[cell] += value;
                 if (field[cell] == 4)
@@ -61,6 +61,10 @@ namespace cv12
 
         public void resetGame()
         {
+            for (int i = 0; i < 9; i++)
+            {
+                field[i] = 0;
+            }
             this.moveCount = 0;
             this.timeSpent = 0;
         }
@@ -81,8 +85,13 @@ namespace cv12
             for (int i = 0; i < 9; i++)
             {
                 if (field[i] != 0)
+                {
+                    Console.WriteLine("game is not over yet");
                     return false;
+                }
+                    
             }
+            Console.WriteLine("game over");
             return true;
         }
 
@@ -126,6 +135,7 @@ namespace cv12
             {
                 int r = rand.Next(3);
                 field[i] = r;
+                Console.WriteLine("Field value of cell {0:D} is " + field[i], i);
                 switch (r)
                 {
                     case 1:

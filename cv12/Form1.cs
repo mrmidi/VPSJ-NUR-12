@@ -27,7 +27,7 @@ namespace cv12
 
         public void drawField() //iterate pictureboxes, load images
         {
-            game.generateField();
+            //
             var imgarray = game.getImages();
             foreach (Control p in this.Controls) 
             {
@@ -77,12 +77,14 @@ namespace cv12
         {
             if (game.enabled == true)
             {
+                game.generateField();
                 game.resetGame();
                 drawField();
             }
-            else
+            else if (game.enabled == false)
             {
                 game.enabled = true;
+                game.generateField();
                 game.resetGame();
                 drawField();
             }
